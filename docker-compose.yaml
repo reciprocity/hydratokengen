@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  hydra:
+    image: oryd/hydra:v1.10.6-sqlite
+    command: |
+      sh -c 'hydra migrate sql -e --yes && hydra serve all --dangerous-force-http'
+    entrypoint: ""
+    environment:
+      SECRETS_SYSTEM: youReallyNeedToChangeThis
+      DSN: sqlite:///tmp/db.sqlite?_fk=true
+      URLS_SELF_ISSUER: http://127.0.0.1:4444
+      URLS_CONSENT: http://placeholder/consent
+      URLS_LOGIN: http://placeholder/login
+      URLS_POST_LOGOUT_REDIRECT: http://placeholder/logout
+      STRATEGIES_ACCESS_TOKEN: jwt
+    ports:
+      - 4444:4444
+      - 4445:4445
