@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "hydratokengen"
+version = "0.1.0"
+description = ""
+authors = ["Luka Zakrajšek <luka@bancek.net>"]
+readme = 'README.md'
+repository = "https://github.com/reciprocity/hydratokengen"
+homepage = "https://github.com/reciprocity/hydratokengen"
+keywords = ['hydra', 'jwt']
+
+[tool.poetry.dependencies]
+python = "^3.7"
+requests = "^2.26.0"
+ory-hydra-client = "^1.10.6"
+
+[tool.poetry.dev-dependencies]
+PyJWT = "^2.3.0"
+pytest = "^5.2"
+pytest-cov = "^3.0.0"
+mock = "^4.0.3"
+black = "^21.9b0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
