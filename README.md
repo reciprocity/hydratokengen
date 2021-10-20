@@ -41,20 +41,7 @@ poetry run black hydratokengen tests
 Start Hydra:
 
 ```sh
-docker run --rm \
-  -e SECRETS_SYSTEM=youReallyNeedToChangeThis \
-  -e DSN=sqlite:///tmp/db.sqlite?_fk=true \
-  -e URLS_SELF_ISSUER=http://127.0.0.1:4444 \
-  -e URLS_CONSENT=http://placeholder/consent \
-  -e URLS_LOGIN=http://placeholder/login \
-  -e URLS_POST_LOGOUT_REDIRECT=http://placeholder/logout \
-  -e STRATEGIES_ACCESS_TOKEN=jwt \
-  -p 4444:4444 \
-  -p 4445:4445 \
-  --name "hydratokengentest" \
-  --entrypoint "" \
-  oryd/hydra:v1.10.6-sqlite \
-  sh -c 'hydra migrate sql -e --yes && hydra serve all --dangerous-force-http'
+docker-compose up -d
 ```
 
 Install dependencies:

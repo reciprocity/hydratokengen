@@ -1,0 +1,29 @@
+name: Test
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Hydra
+      run: |
+        docker-compose up -d
+        echo 'Waiting for Hydra to become healthy'
+        while ! curl -f http://localhost:4445/health/ready; do sleep 1; done
+        echo 'Hydra healthy'
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install poetry
+      run: |
+        curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+    - name: Install dependencies
+      run: |
+        poetry install
+    - name: Run tests
+      run: |
+        poetry run pytest
